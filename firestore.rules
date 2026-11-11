@@ -1,0 +1,41 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function member(roomId) {
+      return signedIn() && exists(/databases/$(database)/documents/rooms/$(roomId)/members/$(request.auth.uid));
+    }
+
+    match /rooms/{roomId} {
+      allow read: if member(roomId);
+      allow write: if false;
+
+      match /members/{uid} {
+        allow read: if member(roomId);
+        allow create: if signedIn() && request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['displayName', 'sharingLocation', 'joinedAt', 'updatedAt'])
+          && request.resource.data.displayName is string
+          && request.resource.data.displayName.size() > 0
+          && request.resource.data.displayName.size() <= 40
+          && request.resource.data.sharingLocation == true;
+        allow update: if signedIn() && request.auth.uid == uid
+          && member(roomId)
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['sharingLocation', 'updatedAt']);
+        allow delete: if signedIn() && request.auth.uid == uid && member(roomId);
+      }
+
+      match /locations/{uid} {
+        allow read: if member(roomId);
+        allow create, update: if signedIn() && request.auth.uid == uid && member(roomId)
+          && get(/databases/$(database)/documents/rooms/$(roomId)/members/$(uid)).data.sharingLocation == true
+          && request.resource.data.keys().hasOnly(['latitude', 'longitude', 'displayName', 'roomId', 'updatedAt'])
+          && request.resource.data.roomId == roomId
+          && request.resource.data.latitude is number
+          && request.resource.data.longitude is number
+          && request.resource.data.latitude >= -90 && request.resource.data.latitude <= 90
+          && request.resource.data.longitude >= -180 && request.resource.data.longitude <= 180;
+        allow delete: if signedIn() && request.auth.uid == uid && member(roomId);
+      }
+    }
+  }
+}

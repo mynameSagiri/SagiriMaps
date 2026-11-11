@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="gl_seed">#6A3DFF</color>
+    <color name="gl_primary">#6A3DFF</color>
+    <color name="gl_onPrimary">#FFFFFF</color>
+    <color name="gl_primaryContainer">#E7DFFF</color>
+    <color name="gl_onPrimaryContainer">#1E0C4F</color>
+    <color name="gl_secondary">#2DBE8A</color>
+    <color name="gl_onSecondary">#062F21</color>
+    <color name="gl_background">#F2FCF7</color>
+    <color name="gl_onBackground">#1B1B2C</color>
+    <color name="gl_surface">#FFFFFF</color>
+    <color name="gl_surface_elevated">#F3F2FF</color>
+    <color name="gl_onSurface">#1B1B2C</color>
+    <color name="gl_accent">#8E5BFF</color>
+    <color name="gl_success">#1D7A56</color>
+    <color name="gl_warning">#B45309</color>
+    <color name="gl_textMuted">#4D5A67</color>
+    <color name="gl_textSecondary">#5F7080</color>
+    <color name="gl_marker_me">#7B42FF</color>
+    <color name="gl_marker_1">#2DBE8A</color>
+    <color name="gl_marker_2">#A569FF</color>
+    <color name="gl_marker_3">#33C9A4</color>
+    <color name="gl_marker_4">#C25DFF</color>
+    <color name="gl_marker_5">#52D48E</color>
+    <color name="gl_marker_6">#7E74FF</color>
+    <color name="gl_divider">#2D000000</color>
+    <color name="gl_input_bg">#F8F6FF</color>
+    <color name="gl_input_stroke">#CFC6EA</color>
+    <color name="gl_input_stroke_focused">#6A3DFF</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+</resources>

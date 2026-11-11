@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.GeoLink" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/gl_primary</item>
+        <item name="colorOnPrimary">@color/gl_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/gl_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/gl_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/gl_secondary</item>
+        <item name="colorOnSecondary">@color/gl_onSecondary</item>
+        <item name="android:colorBackground">@color/gl_background</item>
+        <item name="colorSurface">@color/gl_surface</item>
+        <item name="colorOnSurface">@color/gl_onSurface</item>
+        <item name="materialButtonStyle">@style/Widget.GeoLink.Button.Filled</item>
+        <item name="materialButtonOutlinedStyle">@style/Widget.GeoLink.Button.Outlined</item>
+        <item name="textInputStyle">@style/Widget.GeoLink.TextInputLayout</item>
+        <item name="editTextStyle">@style/Widget.GeoLink.EditText</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/gl_surface</item>
+    </style>
+
+    <style name="Widget.GeoLink.Button.Filled" parent="Widget.Material3.Button">
+        <item name="cornerRadius">14dp</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Widget.GeoLink.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
+        <item name="cornerRadius">14dp</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Widget.GeoLink.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">14dp</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Widget.GeoLink.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="cornerRadius">14dp</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Widget.GeoLink.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundMode">outline</item>
+        <item name="boxBackgroundColor">@color/gl_input_bg</item>
+        <item name="boxStrokeColor">@color/gl_input_stroke</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="hintTextColor">@color/gl_textSecondary</item>
+        <item name="helperTextTextColor">@color/gl_textSecondary</item>
+    </style>
+
+    <style name="Widget.GeoLink.EditText" parent="Widget.Material3.TextInputEditText.OutlinedBox">
+        <item name="android:textColor">@color/gl_onSurface</item>
+        <item name="android:textColorHint">@color/gl_textSecondary</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="Widget.GeoLink.Card.Surface" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/gl_surface_elevated</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">6dp</item>
+        <item name="strokeColor">@color/gl_divider</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="Widget.GeoLink.Card.Surface.Large" parent="Widget.GeoLink.Card.Surface">
+        <item name="cardCornerRadius">24dp</item>
+        <item name="cardElevation">8dp</item>
+    </style>
+
+    <style name="Widget.GeoLink.Card.Highlight" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">@color/gl_primaryContainer</item>
+        <item name="cardCornerRadius">14dp</item>
+        <item name="strokeColor">@color/gl_primary</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+</resources>
