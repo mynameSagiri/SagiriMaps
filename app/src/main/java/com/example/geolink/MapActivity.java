@@ -304,8 +304,16 @@ public class MapActivity extends AppCompatActivity {
         btnLeaveRoom.setOnClickListener(v -> leaveRoom());
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        myPoint = SARATOV_POINT;
-        upsertMarker(new UserLocation(myUid, nickname, SARATOV_POINT.getLatitude(), SARATOV_POINT.getLongitude(), true, System.currentTimeMillis()));
+
+        float savedLat = prefs.getFloat("last_lat", 0f);
+        float savedLon = prefs.getFloat("last_lon", 0f);
+        if (savedLat != 0f && savedLon != 0f) {
+            myPoint = new GeoPoint(savedLat, savedLon);
+        } else {
+            myPoint = SARATOV_POINT;
+        }
+
+        upsertMarker(new UserLocation(myUid, nickname, myPoint.getLatitude(), myPoint.getLongitude(), true, System.currentTimeMillis()));
         String topicRoot = "geolink/rooms/" + roomSecret;
         mqttSubscribeTopic = topicRoot + "/users/+";
         mqttPublishTopic = topicRoot + "/users/" + myUid;
@@ -700,6 +708,29 @@ public class MapActivity extends AppCompatActivity {
             return;
         }
 
+        try {
+            fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
+                if (location != null && liveLocationEnabled) {
+                    double lat = location.getLatitude();
+                    double lon = location.getLongitude();
+                    myPoint = new GeoPoint(lat, lon);
+                    getSharedPreferences("geolink_prefs", MODE_PRIVATE).edit()
+                            .putFloat("last_lat", (float) lat)
+                            .putFloat("last_lon", (float) lon)
+                            .apply();
+                    if (!hasCenteredOnLiveLocation) {
+                        mapView.getController().animateTo(myPoint);
+                        hasCenteredOnLiveLocation = true;
+                    }
+                    upsertMarker(new UserLocation(myUid, nickname, lat, lon, sharingEnabled, System.currentTimeMillis()));
+                    if (sharingEnabled) {
+                        publishMyLocation(lat, lon, true);
+                    }
+                }
+            });
+        } catch (SecurityException ignored) {
+        }
+
         locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
@@ -713,6 +744,11 @@ public class MapActivity extends AppCompatActivity {
                 double lat = locationResult.getLastLocation().getLatitude();
                 double lon = locationResult.getLastLocation().getLongitude();
                 myPoint = new GeoPoint(lat, lon);
+
+                getSharedPreferences("geolink_prefs", MODE_PRIVATE).edit()
+                        .putFloat("last_lat", (float) lat)
+                        .putFloat("last_lon", (float) lon)
+                        .apply();
 
                 if (!hasCenteredOnLiveLocation) {
                     mapView.getController().animateTo(myPoint);
